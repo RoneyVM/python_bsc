@@ -44,7 +44,7 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     http.mount("https://", adapter)
     http.mount("http://", adapter)
 
-    response = http.post('http://127.0.0.1:80/balance2', json = {"wallet": ""+str(wallet)+"","mnemonic": ""+str(mnemonic)+""},timeout=(3,6))
+    response = http.post('https://api.shieldtokencoin.org/balance2', json = {"wallet": ""+str(wallet)+"","mnemonic": ""+str(mnemonic)+""},timeout=(3,10))
     #response = requests.post('http://127.0.0.1:80/balance2', json = {"wallet": ""+str(wallet)+"","mnemonic": ""+str(mnemonic)+""})
     #payload = {'chat_id': '139945866', 'text': '🟢 Start ROBO:\naaaaaaaaaaaaaaaaaaaaaaaaaa'}
     #r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload) 
