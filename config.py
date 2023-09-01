@@ -4,7 +4,7 @@ import uuid
 id=uuid.uuid4()
 serv_name = "Server_HOME"
 #pos02=500;pos03=31;pos04=3;pos05=4;pos06=5;pos07=6;pos08=7;pos09=8;pos10=9;pos11=10;pos12=11
-pos02=0;pos03=0;pos04=23;pos05=18;pos06=5;pos07=6;pos08=7;pos09=8;pos10=9;pos11=10;pos12=11
+pos02=0;pos03=0;pos04=35;pos05=22;pos06=5;pos07=6;pos08=7;pos09=8;pos10=9;pos11=10;pos12=11
 
 
 #mydb = mysql.connector.connect(

@@ -1,0 +1,13 @@
+[Unit]
+Description=API REST PYTHON
+
+[Service]
+Type=simple
+WorkingDirectory=/script/api/
+ExecStart=/usr/bin/python3 /script/api/api.py 80
+Restart=always
+# Restart service after 10 seconds if python service crashes
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
