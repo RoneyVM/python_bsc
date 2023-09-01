@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from web3 import Web3
 import config
 import mysql.connector
-import random, sys
+import random, sys, os
 import validadores
 import array_palavras
 import requests
@@ -227,6 +227,7 @@ def balance():
 
 @app.route('/balance2',methods=['POST'])
 def balance2():
+    os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
     p = request.get_json()
     global wallet
     global balance
@@ -251,9 +252,9 @@ def balance2():
             #arquivo = open("wallet_"+str(id)+".txt", "a")
             #arquivo.write(str(p1)+" "+str(p2)+" "+str(p3)+" "+str(p4)+" "+str(p5)+" "+str(p6)+" "+str(p7)+" "+str(p8)+" "+str(p9)+" "+str(p10)+" "+str(p11)+" "+str(p12)+"\n")                                    
     return jsonify({"wallet": ""+str(wallet)+"","balance": ""+str(balance)+"", "mnemonic":""+str(mnemonic)+""})
-
+    
 PORTA=int(sys.argv[1])
-
-app.run(host='127.0.0.1',port=PORTA,debug=True)
-
+os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
+app.run(host='0.0.0.0',port=PORTA,debug=True)
+os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
 #C:/Users/roney/AppData/Local/Programs/Python/Python311/python.exe c:/Users/roney/Desktop/Automatizacao_Python/v8/app.py 80
