@@ -1,0 +1,23 @@
+CONTAINER_ID='5000' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5001' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5002' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5003' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5004' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5005' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5006' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5007' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5008' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5009' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5010' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5011' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5012' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5013' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5014' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5015' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5016' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5017' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5018' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5019' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='5020' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+
+docker build -t shieldtokencoin/python:1.0 .;docker run -p 5010:80 -d shieldtokencoin/python:1.0;
