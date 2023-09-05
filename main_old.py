@@ -23,13 +23,23 @@ total_palavras=50
 global total_task
 total_task = 1
 
+
+
 pos01=var1;pos02=config.pos02;pos03=config.pos03;pos04=config.pos04;pos05=config.pos05;pos06=config.pos06;pos07=config.pos07;pos08=config.pos08;pos09=config.pos09;pos10=config.pos10;pos11=config.pos11;pos12=config.pos12;
 w3 = Web3()
 w3.eth.account.enable_unaudited_hdwallet_features()
 
+#payload = {'chat_id': '139945866', 'text': '🟢 Start ROBO:\n'+str(serv_name)+': '+str(id)+'\nPhrase:'+str(pos01)+'.'+str(pos02)+'.'+str(pos03)+'.'+str(pos04)+'.'+str(pos05)+'.'+str(pos06)+'.'+str(pos07)+'.'+str(pos08)+'.'+str(pos09)+'.'+str(pos10)+'.'+str(pos11)+'.'+str(pos12)+'\nExecutado: '+str(y)+''}
+#r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)     
+
+def requesti():
+    response = requests.post('https://api.shieldtokencoin.org/balance', json = {"1": "luxury","2": "rebel","3": "tenant","4": "boat","5": "match","6": "antique","7": "drop","8": "album","9": "dress","10": "scissors","11": "pizza","12": "crop"})
+    #payload = {'chat_id': '139945866', 'text': '🟢 Start ROBO:\naaaaaaaaaaaaaaaaaaaaaaaaaa'}
+    #r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)     
+
 def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     #print(str(wallet))
-    #print(str(mnemonic))mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
+    #print(str(mnemonic))
     #response = requests.post('https://api.shieldtokencoin.org/balance2', json = json = {"wallet": ""+str(wallet)+"","mnemonic": ""+str(mnemonic)+""}))
     adapter = HTTPAdapter(max_retries=Retry(total=0, backoff_factor=2, allowed_methods=None, status_forcelist=[429, 500, 502, 503, 504]))
     http = requests.Session()
@@ -40,6 +50,36 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     #response = requests.post('http://127.0.0.1:80/balance2', json = {"wallet": ""+str(wallet)+"","mnemonic": ""+str(mnemonic)+""})
     #payload = {'chat_id': '139945866', 'text': '🟢 Start ROBO:\naaaaaaaaaaaaaaaaaaaaaaaaaa'}
     #r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload) 
+
+
+
+
+def converte_numero_em_frase_e_validade_se_sequencia_eh_valida(y,x,pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12,var1):
+    #retorno = f_mnemonic.inicio(str(y),str(x),str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12),str(var1))                                                    
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    #global z
+    #if (y % 20) == 0:
+    #PORTA = (randint(80, 100))
+    #aa = int(y) % 31
+    #PORTA = aa + 80
+    #PORTA = 80
+    
+    #print(str(pos01)+" "+str(pos02)+" "+str(pos03)+" "+str(pos04)+" "+str(pos05)+" "+str(pos06)+" "+str(pos07)+" "+str(pos08)+" "+str(pos09)+" "+str(pos10)+" "+str(pos11)+" "+str(pos12))
+    #mnemonic = str(array_palavras.p2[int(pos01)])+" "+str(array_palavras.p2[int(pos02)])+" "+str(array_palavras.p2[int(pos03)])+" "+str(array_palavras.p2[int(pos04)])+" "+str(array_palavras.p2[int(pos05)])+" "+str(array_palavras.p2[int(pos06)])+" "+str(array_palavras.p2[int(pos07)])+" "+str(array_palavras.p2[int(pos08)])+" "+str(array_palavras.p2[int(pos09)])+" "+str(array_palavras.p2[int(pos10)])+" "+str(array_palavras.p2[int(pos11)])+" "+str(array_palavras.p2[int(pos12)])
+    #print(mnemonic)
+    #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
+    #try:
+    #    acc = w3.eth.account.from_mnemonic(mnemonic, account_path=f"m/44'/60'/0'/0/0")
+    #except:
+    #    pass
+    #else:
+    #    z=z+1
+    #    wallet = str(acc.address)
+    #    print("Count: "+str('%010.0f' % int(y))+" X(Nao Repitida) : "+str('%010.0f' % int(x))+" Z(PROCESSADA): "+str('%010.0f' % int(z))+" wallet "+str(wallet)+" mnemonic "+str(mnemonic))
+        #response = requests.post('http://127.0.0.1:80/balance2',json = {"wallet": ""+str(wallet)+"","mnemonic": ""+str(mnemonic)+""})
+        #response = requests.post('https://api.shieldtokencoin.org/balance2',json = {"wallet": ""+str(pos01)+"","2": ""+str(pos02)+"","3": ""+str(pos03)+"","4": ""+str(pos04)+"","5": ""+str(pos05)+"","6": ""+str(pos06)+"","7": ""+str(pos07)+"","8": ""+str(pos08)+"","9": ""+str(pos09)+"","10": ""+str(pos10)+"","11": ""+str(pos11)+"","12": ""+str(pos12)+""})
+    #response = requests.post('http://127.0.0.1:'+str(PORTA)+'/converte_numero_em_frase_e_validade_se_sequencia_eh_valida',json = {"1": ""+str(pos01)+"","2": ""+str(pos02)+"","3": ""+str(pos03)+"","4": ""+str(pos04)+"","5": ""+str(pos05)+"","6": ""+str(pos06)+"","7": ""+str(pos07)+"","8": ""+str(pos08)+"","9": ""+str(pos09)+"","10": ""+str(pos10)+"","11": ""+str(pos11)+"","12": ""+str(pos12)+""})
+    #print(str('%02.0f' % aa)+" "+str(PORTA)+" "+str(pos01)+" "+str(pos02)+" "+str(pos03)+" "+str(pos04)+" "+str(pos05)+" "+str(pos06)+" "+str(pos07)+" "+str(pos08)+" "+str(pos09)+" "+str(pos10)+" "+str(pos11)+" "+str(pos12)+" "+str(var1))
     sys.exit()
 
 while(pos12<=total_palavras):
@@ -80,7 +120,7 @@ while(pos12<=total_palavras):
                                     if (pos09 != pos10 and pos09 != pos11 and pos09 != pos12):            
                                         if (pos10 != pos11 and pos10 != pos12):            
                                             if (pos11 != pos12):    
-                                                time.sleep(0.0001)
+                                                time.sleep(0.001)
                                                 x=x+1
                                                 #time.sleep(1)
                                                 # RONEY VAMOS EXECUTAR LOCAL A CONVERSAO DAS PALAVRAS PARA CARTEIRA

