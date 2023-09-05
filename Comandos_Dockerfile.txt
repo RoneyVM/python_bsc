@@ -1,6 +1,6 @@
 git clone https://github.com/RoneyVM/python_bsc.git
 
-cd /python_bsc/Dockerfile/
+cd /python_bsc
 docker build -t shieldtokencoin/python:1.0 .;
 
 CONTAINER_ID='5000' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
