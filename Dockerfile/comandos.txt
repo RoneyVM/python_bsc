@@ -21,3 +21,5 @@ CONTAINER_ID='5019' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128
 CONTAINER_ID='5020' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
 
 docker build -t shieldtokencoin/python:1.0 .;docker run -p 5010:80 -d shieldtokencoin/python:1.0;
+
+git clone https://github.com/RoneyVM/python_bsc.git
