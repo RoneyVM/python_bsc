@@ -1,7 +1,39 @@
-git clone https://github.com/RoneyVM/python_bsc.git
+apt update;apt  install -y docker.io;apt clean;
+# Vamos subir o Portainer para auxiliar a gerenciar os container
+docker volume create portainer_data && docker run -d -p 8000:8000 -p 9443:9443 --cpus=0.1 --memory=128m --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:latest
 
-cd /python_bsc
-docker build -t shieldtokencoin/python:1.0 .;
+# Para acessar o Portainer abra a URL no navegador
+https://191.252.102.54:9443/#!/init/admin
+https://191.252.205.107:9443
+https://191.252.205.84:9443
+
+iptables -A INPUT -p tcp --dport 5000 -j ACCEPT
+iptables -A INPUT -p tcp --dport 5001 -j ACCEPT
+iptables -A INPUT -p tcp --dport 5002 -j ACCEPT
+iptables -A INPUT -p tcp --dport 5003 -j ACCEPT
+iptables -A INPUT -p tcp --dport 5004 -j ACCEPT
+iptables -A INPUT -p tcp --dport 5005 -j ACCEPT
+ufw allow 5000/tcp
+ufw allow 5001/tcp
+ufw allow 5002/tcp
+ufw allow 5003/tcp
+ufw allow 5004/tcp
+ufw allow 5005/tcp
+ufw allow 5000/udp
+ufw allow 5001/udp
+ufw allow 5002/udp
+ufw allow 5003/udp
+ufw allow 5004/udp
+ufw allow 5005/udp
+
+cd /;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;docker build -t shieldtokencoin/python:1.0 .;
+
+CONTAINER_ID='80' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='81' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='82' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='83' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='84' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='85' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
 
 CONTAINER_ID='5000' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
 CONTAINER_ID='5001' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;

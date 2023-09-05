@@ -26,7 +26,7 @@ w3.eth.account.enable_unaudited_hdwallet_features()
 
 @app.route('/balance',methods=['POST'])
 def balance2():
-    os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
+    #os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
     p = request.get_json()
     global wallet
     global balance
@@ -67,7 +67,7 @@ def balance2():
     sys.exit()
     
 PORTA=int(sys.argv[1])
-os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
+#os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
 app.run(host='0.0.0.0',port=PORTA,debug=True)
-os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
+#os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
 #C:/Users/roney/AppData/Local/Programs/Python/Python311/python.exe c:/Users/roney/Documents/GitHub/python_bsc/api.py 80
