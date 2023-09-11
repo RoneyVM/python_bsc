@@ -4,5 +4,7 @@ p = ["abandon","ability","able","about","above","absent","absorb","abstract","ab
 
 p2 = ['party', 'foil', 'label', 'bag', 'planet', 'fantasy', 'expose', 'awkward', 'stock', 'inch', 'input', 'dust', 'wage', 'child', 'gap', 'skill', 'decline', 'notable', 'solar', 'among', 'artist', 'what', 'east', 'junior', 'lottery', 'october', 'refuse', 'swing', 'define', 'road', 'grow', 'pudding', 'luxury', 'spot', 'angry', 'grab', 'acoustic', 'walk', 'trophy', 'echo', 'ankle', 'pilot', 'fade', 'jungle', 'nation', 'photo', 'universe', 'snake', 'holiday', 'speak']
 
-palavra_random = random.sample(p, 50)
+p2 = ['depart', 'guilt', 'wall', 'shuffle', 'write', 'bottom', 'step', 'regret', 'present', 'predict', 'laundry', 'source', 'grain']
+
+palavra_random = random.sample(p, 13)
 print(palavra_random)

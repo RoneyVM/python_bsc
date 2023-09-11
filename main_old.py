@@ -5,7 +5,7 @@ import requests
 import config
 import sys, os, json
 import array_palavras
-import f_mnemonic
+import f_mnemonic_v2
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
@@ -126,7 +126,7 @@ while(pos12<=total_palavras):
                                                 # RONEY VAMOS EXECUTAR LOCAL A CONVERSAO DAS PALAVRAS PARA CARTEIRA
                                                 # AINDA É A FORMA MAIS EFICIENTE
                                                 
-                                                retorno = f_mnemonic.inicio(str(y),str(x),str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12),str(var1))                                                
+                                                retorno = f_mnemonic_v2.inicio(str(y),str(x),str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12),str(var1))                                                
                                                 if not retorno:
                                                     pass
                                                 else:      
