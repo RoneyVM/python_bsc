@@ -1,23 +1,22 @@
 from flask import Flask, jsonify, request
 from web3 import Web3
-import config
-import mysql.connector
-import random, sys, os, json
+#import config
+#import mysql.connector
+import random, sys
+#import os, json
 import validadores
-import array_palavras
+#import array_palavras
 import requests
 from decimal import *
 #import resource
 #resource.setrlimit(resource.RLIMIT_AS, ((10 * 1024 * 1024 * 16),(10 * 1024 * 1024 * 16)))
 #print(resource.getrlimit(resource.RLIMIT_AS))
 
-select_em = 100
-deleta_em = 200
+#select_em = 100
+#deleta_em = 200
 
 app = Flask(__name__)
 
-wallet=[]
-palavras2=[]
 
 w3 = Web3()
 rand = random.randint(0,32)
@@ -28,9 +27,6 @@ w3.eth.account.enable_unaudited_hdwallet_features()
 def balance2():
     #os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
     p = request.get_json()
-    global wallet
-    global balance
-    global mnemonic
     wallet = str(p['wallet'])
     balance = str(0)
     mnemonic = str(p['mnemonic'])

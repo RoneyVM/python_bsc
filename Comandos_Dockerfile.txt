@@ -2,6 +2,30 @@
 ## 1 comando só
 apt update;apt  install -y docker.io;apt clean;docker volume create portainer_data && docker run -d -p 8000:8000 -p 9443:9443 --cpus=0.1 --memory=128m --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:latest;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;docker build -t shieldtokencoin/python:1.0 .;CONTAINER_ID='80' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
 ############################################
+#####################
+## REMOVE O DOCKER
+apt-get purge -y docker docker.io docker-ce;apt-get autoremove -y --purge docker docker.io docker-ce;rm -rf /var/lib/docker /etc/docker;rm /etc/apparmor.d/docker;groupdel docker;rm -rf /var/run/docker.sock;
+#############################################
+
+################
+## PORTAINER - GCP-SRV1 - 34.130.104.8
+docker stop portainer;docker rm portainer;docker rmi -f portainer/portainer;rm -rf /var/lib/docker /etc/docker;groupdel docker;rm -rf /var/run/docker.sock;touch /var/run/docker.sock;apt update;apt  install -y docker.io;apt clean;docker volume create portainer_data && docker run -d -p 8000:8000 -p 9443:9443 --cpus=0.1 --memory=128m --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:latest;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;docker build -t shieldtokencoin/python:1.0 .;
+CONTAINER_ID='80' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='81' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='82' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='83' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='84' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+################
+
+################
+## PORTAINER - GCP-SRV2 - 34.130.72.204
+docker stop portainer;docker rm portainer;docker rmi -f portainer/portainer;rm -rf /var/lib/docker /etc/docker;groupdel docker;rm -rf /var/run/docker.sock;touch /var/run/docker.sock;apt update;apt  install -y docker.io;apt clean;docker volume create portainer_data && docker run -d -p 8000:8000 -p 9443:9443 --cpus=0.1 --memory=128m --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:latest;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;docker build -t shieldtokencoin/python:1.0 .;
+CONTAINER_ID='80' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='81' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='82' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='83' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='84' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+################
 
 apt update;apt  install -y docker.io;apt clean;
 # Vamos subir o Portainer para auxiliar a gerenciar os container
@@ -16,7 +40,7 @@ iptables -A INPUT -p tcp --dport 5000 -j ACCEPT
 iptables -A INPUT -p tcp --dport 5001 -j ACCEPT
 iptables -A INPUT -p tcp --dport 5002 -j ACCEPT
 iptables -A INPUT -p tcp --dport 5003 -j ACCEPT
-iptables -A INPUT -p tcp --dport 5004 -j ACCEPT
+iptables -A INPUT -p tcp --dport 5004 -j ACCEPTdocker 
 iptables -A INPUT -p tcp --dport 5005 -j ACCEPT
 ufw allow 5000/tcp
 ufw allow 5001/tcp
