@@ -17,6 +17,12 @@ apt-get purge -y docker docker.io docker-ce;apt-get autoremove -y --purge docker
 apt update;apt  install -y docker.io;apt clean;apt -y autoremove;docker volume create portainer_data && docker run -d -p 8000:8000 -p 9443:9443 --cpus=0.1 --memory=128m --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:latest;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;docker build -t shieldtokencoin/python:1.0 .;CONTAINER_ID='80' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;CONTAINER_ID='81' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;CONTAINER_ID='82' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;CONTAINER_ID='83' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;CONTAINER_ID='84' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
 ################
 
+#############
+## CRIA IMAGEM DO WALLET RANDOM
+cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;docker build -t shieldtokencoin/python_wallet_random:1.0 .;
+docker run -d --cpus=0.5 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python_wallet_random:1.0;
+#############
+
 apt update;apt  install -y docker.io;apt clean;
 # Vamos subir o Portainer para auxiliar a gerenciar os container
 docker volume create portainer_data && docker run -d -p 8000:8000 -p 9443:9443 --cpus=0.1 --memory=128m --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:latest
