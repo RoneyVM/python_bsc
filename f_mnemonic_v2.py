@@ -11,10 +11,10 @@ w3 = Web3()
 w3.eth.account.enable_unaudited_hdwallet_features()
 
 
-def inicio(cont_seq,cont_ord,p1,palavra_random,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,var1):
+def inicio(cont_seq,cont_ord,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,var1):
     #print(str(cont_seq))
     #print(str(array_palavras.p[int(p1)]))
-    mnemonic = str(array_palavras.palavra_random[int(p1)])+" "+str(array_palavras.palavra_random[int(palavra_random)])+" "+str(array_palavras.palavra_random[int(p3)])+" "+str(array_palavras.palavra_random[int(p4)])+" "+str(array_palavras.palavra_random[int(p5)])+" "+str(array_palavras.palavra_random[int(p6)])+" "+str(array_palavras.palavra_random[int(p7)])+" "+str(array_palavras.palavra_random[int(p8)])+" "+str(array_palavras.palavra_random[int(p9)])+" "+str(array_palavras.palavra_random[int(p10)])+" "+str(array_palavras.palavra_random[int(p11)])+" "+str(array_palavras.palavra_random[int(p12)])
+    mnemonic = str(array_palavras.palavra_random[int(p1)])+" "+str(array_palavras.palavra_random[int(p2)])+" "+str(array_palavras.palavra_random[int(p3)])+" "+str(array_palavras.palavra_random[int(p4)])+" "+str(array_palavras.palavra_random[int(p5)])+" "+str(array_palavras.palavra_random[int(p6)])+" "+str(array_palavras.palavra_random[int(p7)])+" "+str(array_palavras.palavra_random[int(p8)])+" "+str(array_palavras.palavra_random[int(p9)])+" "+str(array_palavras.palavra_random[int(p10)])+" "+str(array_palavras.palavra_random[int(p11)])+" "+str(array_palavras.palavra_random[int(p12)])
     #print(mnemonic)
     #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
     try:
@@ -28,6 +28,6 @@ def inicio(cont_seq,cont_ord,p1,palavra_random,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,
             #print(f"address{i + 1} = '{acc.address}'")      
         w=str(acc.address)
         #print(cont_seq+" "+cont_ord+" "+w+" "+p1+" "+palavra_random+" "+p3+" "+p4+" "+p5+" "+p6+" "+p7+" "+p8+" "+p9+" "+p10+" "+p11+" "+p12+" "+mnemonic)
-        value = {"cont_seq": ""+cont_seq+"", "cont_ord": ""+cont_ord+"", "wallet": ""+w+"", "seq": ""+p1+"."+palavra_random+"."+p3+"."+p4+"."+p5+"."+p6+"."+p7+"."+p8+"."+p9+"."+p10+"."+p11+"."+p12+"", "mnemonic": ""+mnemonic+""}
+        value = {"cont_seq": ""+cont_seq+"", "cont_ord": ""+cont_ord+"", "wallet": ""+w+"", "seq": ""+p1+"."+p2+"."+p3+"."+p4+"."+p5+"."+p6+"."+p7+"."+p8+"."+p9+"."+p10+"."+p11+"."+p12+"", "mnemonic": ""+mnemonic+""}
         return json.dumps(value)
         

@@ -21,7 +21,7 @@ x = config.x
 y = config.y
 val = config.val
 inclusao = []
-total_palavras=13
+total_palavras=15
 global total_task
 global response
 global response2
@@ -131,6 +131,23 @@ def executa_processo(y,x,pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,p
         #Thread(target = chama_api_dos_nodes_para_validar_o_balance, args=(str(y),str(x),str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12),str(var1)), daemon=True).start()
         Thread(target = chama_api_dos_nodes_para_validar_o_balance, args=(str(r['wallet']),str(r['mnemonic'])), daemon=True).start()
 
+def validada_pos01(pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12):
+    #if(pos01 > total_palavras):
+    if(pos01 == pos02 or pos01 == pos03 or pos01 == pos04 or pos01 == pos05 or pos01 == pos06 or pos01 == pos07 or pos01 == pos08 or pos01 == pos09 or pos01 == pos10 or pos01 == pos11 or pos01 == pos12):
+        pos01=pos01+1
+    return (pos01)
+
+def validada_pos02(pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12):
+    #if(pos01 > total_palavras):
+    if(pos01 == pos02 or pos02 == pos03 or pos02 == pos04 or pos02 == pos05 or pos02 == pos06 or pos02 == pos07 or pos02 == pos08 or pos02 == pos09 or pos02 == pos10 or pos02 == pos11 or pos02 == pos12):
+        pos02=pos02+1
+    return (pos02)
+
+def validada_pos03(pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12):
+    #if(pos01 > total_palavras):
+    if(pos03 == pos01 or pos03 == pos02 or pos03 == pos04 or pos03 == pos05 or pos03 == pos06 or pos03 == pos07 or pos03 == pos08 or pos03 == pos09 or pos03 == pos10 or pos03 == pos11 or pos03 == pos12):
+        pos03=pos03+1
+    return (pos03)
 
 def validada_limite_dos_valores(var1,pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12):
     if (pos01 >= total_palavras): pos01=var1;pos02=pos02+1   
@@ -159,7 +176,7 @@ while(pos12<=total_palavras):
         print("Count: "+str('%012.0f' % int(y))+" | "+str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12))
 
     if(valida_array(palavras) is True):
-        #print("True: ", str(palavras))
+        print("True: ", str(palavras))
         #executa_processo(y,x,pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12,var1)
         retorno = f_mnemonic_v2.inicio(str(y),str(x),str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12),str(var1))
         if not retorno:
@@ -174,7 +191,7 @@ while(pos12<=total_palavras):
             #Thread(target = chama_api_dos_nodes_para_validar_o_balance, args=(str(y),str(x),str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12),str(var1)), daemon=True).start()
             Thread(target = chama_api_dos_nodes_para_validar_o_balance, args=(str(r['wallet']),str(r['mnemonic'])), daemon=True).start()        
     else:
-        #print("False: ", str(palavras))
+        print("False: ", str(palavras))
         while(valida_array(palavras) is False):
             #pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12 = validada_limite_dos_valores(var1,pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12)   
             
@@ -266,8 +283,82 @@ while(pos12<=total_palavras):
                 else:
                     break                
 
-            break     
+            break
+                #while(pos01 <= total_palavras or valida_array(palavras) is True):
+                #    print(pos01,valida_array(palavras))
+                #    if (pos01 == pos02 or pos01 == pos03 or pos01 == pos04 or pos01 == pos05 or pos01 == pos06 or pos01 == pos07 or pos01 == pos08 or pos01 == pos09 or pos01 == pos10 or pos01 == pos11 or pos01 == pos12):
+                #        pos01=pos01+1
+            if (pos01 == pos02 or pos01 == pos03 or pos01 == pos04 or pos01 == pos05 or pos01 == pos06 or pos01 == pos07 or pos01 == pos08 or pos01 == pos09 or pos01 == pos10 or pos01 == pos11 or pos01 == pos12):
+                pos01=pos01+1                    
+            elif (pos02 == pos03 or pos02 == pos04 or pos02 == pos05 or pos02 == pos06 or pos02 == pos07 or pos02 == pos08 or pos02 == pos09 or pos02 == pos10 or pos02 == pos11 or pos02 == pos12):
+                pos02=pos02+1
+            elif (pos03 == pos04 or pos03 == pos05 or pos03 == pos06 or pos03 == pos07 or pos03 == pos08 or pos03 == pos09 or pos03 == pos10 or pos03 == pos11 or pos03 == pos12):
+                pos03=pos03+1
+            elif (pos04 == pos05 or pos04 == pos06 or pos04 == pos07 or pos04 == pos08 or pos04 == pos09 or pos04 == pos10 or pos04 == pos11 or pos04 == pos12):
+                pos04=pos04+1
+            elif (pos05 == pos06 or pos05 == pos07 or pos05 == pos08 or pos05 == pos09 or pos05 == pos10 or pos05 == pos11 or pos05 == pos12):
+                pos05=pos05+1
+            elif (pos06 == pos07 or pos06 == pos08 or pos06 == pos09 or pos06 == pos10 or pos06 == pos11 or pos06 == pos12):
+                pos06=pos06+1
+            elif (pos07 == pos08 or pos07 == pos09 or pos07 == pos10 or pos07 == pos11 or pos07 == pos12):
+                pos07=pos07+1
+            elif (pos08 == pos09 or pos08 == pos10 or pos08 == pos11 or pos08 == pos12):
+                pos08=pos08+1
+            elif (pos09 == pos10 or pos09 == pos11 or pos09 == pos12):
+                pos09=pos09+1
+            elif (pos10 == pos11 or pos10 == pos12):
+                pos10=pos10+1
+            elif (pos11 == pos12):
+                pos11=pos11+1
+            else:
+                print("xxxxxxxxxxxxxxxxxxxxxx")
+        #pos01 = validada_pos01(pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12)
+        #pos02 = validada_pos02(pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12)
+        #pos03 = validada_pos02(pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12)         
 
     
     time.sleep(0.00000005)
+    #if (pos01 > total_palavras): pos01=var1;pos02=pos02+1
+    #if ((pos01 == total_palavras) or (pos02 == pos03 or pos02 == pos04 or pos02 == pos05 or pos02 == pos06 or pos02 == pos07 or pos02 == pos08 or pos02 == pos09 or pos02 == pos10 or pos02 == pos11 or pos02 == pos12)): 
+    #    pos01=var1;pos02=pos02+1
+    #if ((pos02 == total_palavras) or (pos03 == pos04 or pos03 == pos05 or pos03 == pos06 or pos03 == pos07 or pos03 == pos08 or pos03 == pos09 or pos03 == pos10 or pos03 == pos11 or pos03 == pos12)): 
+    #    pos02=0;pos03=pos03+1    
+    #if ((pos03 == total_palavras) or (pos04 == pos05 or pos04 == pos06 or pos04 == pos07 or pos04 == pos08 or pos04 == pos09 or pos04 == pos10 or pos04 == pos11 or pos04 == pos12)): 
+    #    pos03=0;pos04=pos04+1          
+    #if ((pos04 == total_palavras) or (pos05 == pos06 or pos05 == pos07 or pos05 == pos08 or pos05 == pos09 or pos05 == pos10 or pos05 == pos11 or pos05 == pos12)):
+    #    pos04=0;pos05=pos05+1
+    #if ((pos05 == total_palavras) or (pos06 == pos07 or pos06 == pos08 or pos06 == pos09 or pos06 == pos10 or pos06 == pos11 or pos06 == pos12)): 
+    #    pos05=0;pos06=pos06+1          
+    #if ((pos06 == total_palavras) or (pos07 == pos08 or pos07 == pos09 or pos07 == pos10 or pos07 == pos11 or pos07 == pos12)): 
+    #    pos06=0;pos07=pos07+1          
+    #if ((pos07 == total_palavras) or (pos08 == pos09 or pos08 == pos10 or pos08 == pos11 or pos08 == pos12)): 
+    #    pos07=0;pos08=pos08+1
+    #if ((pos08 == total_palavras) or (pos09 == pos10 or pos09 == pos11 or pos09 == pos12)): 
+    #    pos08=0;pos09=pos09+1          
+    #if ((pos09 == total_palavras) or (pos10 == pos11 or pos10 == pos12)): 
+    #    pos09=0;pos10=pos10+1          
+    #if ((pos10 == total_palavras) or (pos11 == pos12)): 
+    #    pos10=0;pos11=pos11+1          
+    #if (pos11 == total_palavras): pos11=0;pos12=pos12+1    
+
+    #if (pos01 != pos02 and pos01 != pos03 and pos01 != pos04 and pos01 != pos05 and pos01 != pos06 and pos01 != pos07 and pos01 != pos08 and pos01 != pos09 and pos01 != pos10 and pos01 != pos11 and pos01 != pos12):
+    #    if (pos02 != pos03 and pos02 != pos04 and pos02 != pos05 and pos02 != pos06 and pos02 != pos07 and pos02 != pos08 and pos02 != pos09 and pos02 != pos10 and pos02 != pos11 and pos02 != pos12):
+    #        if (pos03 != pos04 and pos03 != pos05 and pos03 != pos06 and pos03 != pos07 and pos03 != pos08 and pos03 != pos09 and pos03 != pos10 and pos03 != pos11 and pos03 != pos12):            
+    #            if (pos04 != pos05 and pos04 != pos06 and pos04 != pos07 and pos04 != pos08 and pos04 != pos09 and pos04 != pos10 and pos04 != pos11 and pos04 != pos12):            
+    #                if (pos05 != pos06 and pos05 != pos07 and pos05 != pos08 and pos05 != pos09 and pos05 != pos10 and pos05 != pos11 and pos05 != pos12):   
+    #                    if (pos06 != pos07 and pos06 != pos08 and pos06 != pos09 and pos06 != pos10 and pos06 != pos11 and pos06 != pos12):            
+    #                        if (pos07 != pos08 and pos07 != pos09 and pos07 != pos10 and pos07 != pos11 and pos07 != pos12):            
+    #                            if (pos08 != pos09 and pos08 != pos10 and pos08 != pos11 and pos08 != pos12):            
+    #                                if (pos09 != pos10 and pos09 != pos11 and pos09 != pos12):            
+    #                                    if (pos10 != pos11 and pos10 != pos12):            
+    #                                        if (pos11 != pos12):    
+    #                                            time.sleep(0.00001)
+    #                                            x=x+1
+    #                                            #time.sleep(1)
+    #                                            # RONEY VAMOS EXECUTAR LOCAL A CONVERSAO DAS PALAVRAS PARA CARTEIRA
+    #                                            # AINDA É A FORMA MAIS EFICIENTE
+    #                                            #print(str(y),str(x),str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12),str(var1))
+    #                                            executa_processo(y,x,pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12,var1)
+
+
 
