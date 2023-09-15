@@ -8,6 +8,8 @@ apt update;apt  install -y docker.io;apt clean;docker volume create portainer_da
 apt-get purge -y docker docker.io docker-ce;apt-get autoremove -y --purge docker docker.io docker-ce;rm -rf /var/lib/docker /etc/docker;rm /etc/apparmor.d/docker;groupdel docker;rm -rf /var/run/docker.sock;
 #############################################
 
+echo 3 > /proc/sys/vm/drop_caches;sysctl -w vm.drop_caches=3;swapoff -a && swapon -a;clear;echo "Limpeza do Cache e Swap efetuada com sucesso"
+
 ################
 ## PORTAINER - GCP-SRV1 - 34.130.104.8
 ## PORTAINER - GCP-SRV2 - 34.130.72.204
@@ -19,7 +21,7 @@ apt update;apt  install -y docker.io;apt clean;apt -y autoremove;docker volume c
 
 #############
 ## CRIA IMAGEM DO WALLET RANDOM
-cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;docker build -t shieldtokencoin/python_wallet_random:1.0 .;docker run -d --cpus=0.5 --memory=128m --name py$CONTAINER_ID --restart always shieldtokencoin/python_wallet_random:1.0;
+cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;docker build -t shieldtokencoin/python_wallet_random:1.0 .;docker run -d --cpus=0.1 --memory=120m --name python_wallet_random --restart always shieldtokencoin/python_wallet_random:1.0;
 #############
 
 apt update;apt  install -y docker.io;apt clean;
