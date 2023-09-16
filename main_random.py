@@ -9,7 +9,10 @@ import itertools
 import f_mnemonic_v2,f_mnemonic_v1
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
+import socket
 
+hostname=socket.gethostname()   
+IPAddr=socket.gethostbyname(hostname)   
 
 var1=int(sys.argv[1])
 var12=int(sys.argv[2])
@@ -80,14 +83,14 @@ def chama_api_dos_nodes_para_validar_o_balance2(wallet,mnemonic):
     else:
         chama_api_dos_nodes_para_validar_o_balance2(wallet,mnemonic)  
 
-payload = {'chat_id': '139945866', 'text': '🟢 AUTO - LOOP ROBO:\n'+str(serv_name)+': '+str(id)+''}
+payload = {'chat_id': '139945866', 'text': '🟢 AUTO - LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nHostname: '+str(hostname)+'\nIPAddr: '+str(IPAddr)+''}
 r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)    
 
 
 # ENVIA QUANDO ATINGE 10M
 def send_telegram(serv_name,id,y,x):
     # print(f"count: "+str(count)+" - "+str(mnemonic))
-    payload = {'chat_id': '139945866', 'text': '🟢 AUTO - LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nPalavras Verificadas:'+str(y)+'\nCarteiras Verificadas: '+str(x)+''}
+    payload = {'chat_id': '139945866', 'text': '🟢 AUTO - LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nHostname: '+str(hostname)+'\nIPAddr: '+str(IPAddr)+'\nPalavras Verificadas:'+str(y)+'\nCarteiras Verificadas: '+str(x)+''}
     r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
 
 vv=array_palavras.p
