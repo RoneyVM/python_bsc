@@ -69,11 +69,11 @@ cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;dock
 
 cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;docker build -t shieldtokencoin/python:1.0 .;
 
-CONTAINER_ID='80' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
-CONTAINER_ID='81' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
-CONTAINER_ID='82' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
-CONTAINER_ID='83' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
-CONTAINER_ID='84' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='86' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=256m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='87' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='88' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='89' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+CONTAINER_ID='90' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
 CONTAINER_ID='85' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=220m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
 
 kill -9 $(lsof -i -P -n | grep 5000 | awk '{print $2}');CONTAINER_ID='5000' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=120m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;

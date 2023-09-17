@@ -7,4 +7,4 @@ RUN pip install flask
 RUN pip install web3
 RUN pip install mysql-connector-python
 #CMD ["python","main_random.py","0","0"] 
-CMD ["python","api.py"] 
+CMD ["python","api.py","80"] 
