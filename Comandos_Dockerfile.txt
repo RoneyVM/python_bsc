@@ -23,9 +23,12 @@ apt update;apt  install -y docker.io;apt clean;apt -y autoremove;docker volume c
 
 #############
 ## CRIA IMAGEM DO WALLET RANDOM
-apt update;apt  install -y docker.io;apt clean;docker volume create portainer_data && docker run -d -p 8000:8000 -p 9443:9443 --cpus=0.1 --memory=128m --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:latest;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;docker build -t shieldtokencoin/python_wallet_random:1.0 .;
+apt update;apt  install -y docker.io;apt clean;docker volume create portainer_data && docker run -d -p 8000:8000 -p 9443:9443 --cpus=0.1 --memory=128m --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:latest;
+cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;
+vi Dockerfile
+docker build -t shieldtokencoin/python_wallet_random:1.0 .;docker run -d --cpus=0.2 --memory=400m --name python_wallet_random_1 --restart always shieldtokencoin/python_wallet_random:1.0;docker run -d --cpus=0.2 --memory=400m --name python_wallet_random_2 --restart always shieldtokencoin/python_wallet_random:1.0;docker run -d --cpus=0.2 --memory=400m --name python_wallet_random_3 --restart always shieldtokencoin/python_wallet_random:1.0;docker run -d --cpus=0.2 --memory=400m --name python_wallet_random_4 --restart always shieldtokencoin/python_wallet_random:1.0;
 
-docker run -d --cpus=1 --memory=4098m --name python_wallet_random_1 --restart always shieldtokencoin/python_wallet_random:1.0;
+docker run -d --cpus=1.8 --memory=4098m --name python_wallet_random_1 --restart always shieldtokencoin/python_wallet_random:1.0;
 docker run -d --cpus=0.15 --memory=300m --name python_wallet_random_2 --restart always shieldtokencoin/python_wallet_random:1.0;
 docker run -d --cpus=0.15 --memory=300m --name python_wallet_random_3 --restart always shieldtokencoin/python_wallet_random:1.0;
 docker run -d --cpus=0.15 --memory=300m --name python_wallet_random_4 --restart always shieldtokencoin/python_wallet_random:1.0;
