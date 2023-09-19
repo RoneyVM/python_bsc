@@ -115,6 +115,6 @@ while True:
         w=str(acc.address)
         Thread(target = chama_api_dos_nodes_para_validar_o_balance, args=(str(w),str(mnemonic)), daemon=True).start()
         
-        if (x % 1000) == 0:
+        if (x % 10000) == 0:
             time.sleep(1)
             send_telegram(serv_name,id,y,x)  

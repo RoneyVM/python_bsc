@@ -1,5 +1,5 @@
 import random
-
+#https://chainlist.org/chain/56
 bsc01 = "https://bsc.rpc.blxrbdn.com"
 bsc02 = "https://bsc-rpc.gateway.pokt.network"
 bsc03 = "https://bsc.publicnode.com"
