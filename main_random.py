@@ -85,14 +85,14 @@ def chama_api_dos_nodes_para_validar_o_balance2(wallet,mnemonic):
     else:
         chama_api_dos_nodes_para_validar_o_balance2(wallet,mnemonic)  
 
-payload = {'chat_id': '139945866', 'text': '🟢 AUTO - LOOP ROBO:\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\n'+str(serv_name)+': '+str(id)+'\nHostname: '+str(hostname)+'\nIPAddr: '+str(IPAddr)+''}
+payload = {'chat_id': '139945866', 'text': '🟢 START - ROBO:\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\n'+str(serv_name)+': '+str(id)+'\nHostname: '+str(hostname)+'\nIPAddr: '+str(IPAddr)+''}
 r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)    
 
 
 # ENVIA QUANDO ATINGE 10M
 def send_telegram(serv_name,id,y,x):
     # print(f"count: "+str(count)+" - "+str(mnemonic))
-    payload = {'chat_id': '139945866', 'text': '🟢 AUTO - LOOP ROBO:\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\n'+str(serv_name)+': '+str(id)+'\nHostname: '+str(hostname)+'\nIPAddr: '+str(IPAddr)+'\nPalavras Verificadas:'+str(y)+'\nCarteiras Verificadas: '+str(x)+''}
+    payload = {'chat_id': '139945866', 'text': '🟠 AUTO - LOOP ROBO:\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\n'+str(serv_name)+': '+str(id)+'\nHostname: '+str(hostname)+'\nIPAddr: '+str(IPAddr)+'\nPalavras Verificadas:'+str(y)+'\nCarteiras Verificadas: '+str(x)+''}
     r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
 
 vv=array_palavras.p
