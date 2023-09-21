@@ -4,9 +4,9 @@ p = ["abandon","ability","able","about","above","absent","absorb","abstract","ab
 
 #p2 = ['party', 'foil', 'label', 'bag', 'planet', 'fantasy', 'expose', 'awkward', 'stock', 'inch', 'input', 'dust', 'wage', 'child', 'gap', 'skill', 'decline', 'notable', 'solar', 'among', 'artist', 'what', 'east', 'junior', 'lottery', 'october', 'refuse', 'swing', 'define', 'road', 'grow', 'pudding', 'luxury', 'spot', 'angry', 'grab', 'acoustic', 'walk', 'trophy', 'echo', 'ankle', 'pilot', 'fade', 'jungle', 'nation', 'photo', 'universe', 'snake', 'holiday', 'speak']
 
-p2 = ['file', 'letter', 'time', 'youth', 'observe', 'such', 'alien', 'enemy', 'harsh', 'half', 'catch', 'wear', 'ski', 'board', 'utility']
-p2 = ['luxury', 'rebel', 'tenant', 'boat', 'match', 'antique', 'drop', 'album', 'dress', 'scissors', 'pizza', 'crop', 'wage']
+#p2 = ['file', 'letter', 'time', 'youth', 'observe', 'such', 'alien', 'enemy', 'harsh', 'half', 'catch', 'wear', 'ski', 'board', 'utility']
+#p2 = ['luxury', 'rebel', 'tenant', 'boat', 'match', 'antique', 'drop', 'album', 'dress', 'scissors', 'pizza', 'crop', 'wage']
 
-#palavra_random = random.sample(p2, 15)
-palavra_random = p2
+palavra_random = random.sample(p, 200)
+#palavra_random = p2
 #print(palavra_random)
