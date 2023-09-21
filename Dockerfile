@@ -7,5 +7,5 @@ RUN pip install flask
 RUN pip install web3
 RUN pip install mysql-connector-python
 #CMD ["python","main_random.py","0","0", "SERVER_NAME", "SERVER_IP"] 
-CMD ["python","main_random_standalone.py","0","0", "aws_gabriel_server2", "18.118.215.71"] 
+CMD ["python","main_random_standalone.py","0","0", "aws_gabriel_server3", "18.221.146.169"] 
 #CMD ["python","api.py","80"] 
