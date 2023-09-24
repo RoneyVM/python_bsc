@@ -140,7 +140,12 @@ while(pos12<=total_palavras):
     palavras = [pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12]
     if (y % 10000000) == 0:
         time.sleep(1)
-        send_telegram(serv_name,id,y,palavras)
+        payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\nPhrase:'+str(palavras)+'\nExecutado: '+str(y)+''}
+        r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
+        if r.ok:
+            pass
+        else:
+            send_telegram(serv_name,id,y,palavras)
         print("Count: "+str('%012.0f' % int(y))+" | "+str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12))
 
     if(valida_array(palavras) is True):
