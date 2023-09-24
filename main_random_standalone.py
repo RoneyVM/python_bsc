@@ -146,7 +146,7 @@ while(pos12<=total_palavras):
     palavras = [pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12]
     if (y % 1000000) == 0:
         time.sleep(30)
-        payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\nPhrase:'+str(palavras)+'\nExecutado: '+str(y)+''}
+        payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO'}
         r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
         if r.ok:
             pass

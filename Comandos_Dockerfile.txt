@@ -45,6 +45,7 @@ docker run -d --cpus=1.8 --memory=4098m --name python_wallet_random_4 --restart 
 ########### SUBINDO SERVER SEM DOCKER
 apt update;apt-get install -y software-properties-common;apt-get install -y python3.10;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;apt install -y pip;pip install eth_account;pip install web3;nohup python3.10 main_random_standalone.py 0 0 aws_pix_bb6 13.59.213.114 &
 
+pip install ndg-httpsclient;pip install pyopenssl;pip install pyasn1;
 
 crontab -e
 
