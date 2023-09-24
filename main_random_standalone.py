@@ -72,8 +72,10 @@ def send_telegram(serv_name,id,y,palavras):
     # print(f"count: "+str(count)+" - "+str(mnemonic))
     payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\nPhrase:'+str(palavras)+'\nExecutado: '+str(y)+''}
     r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
-
-
+    if r.ok:
+        pass
+    else:
+        send_telegram(serv_name,id,y,palavras)
 
 # RETORNA TRUE OR FALSE
 def valida_array(palavras):
