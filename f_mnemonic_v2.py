@@ -36,8 +36,8 @@ def inicio(cont_seq,cont_ord,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,var1):
         pass
         #print("Erro")
     else:
-        for i in range(1):
-            acc = w3.eth.account.from_mnemonic(mnemonic, account_path=f"m/44'/60'/0'/0/{i}")
+        #for i in range(1):
+        #    acc = w3.eth.account.from_mnemonic(mnemonic, account_path=f"m/44'/60'/0'/0/{i}")
             #print(f"address{i + 1} = '{acc.address}'")      
         w=str(acc.address)
         #print(cont_seq+" "+cont_ord+" "+w+" "+p1+" "+palavra_random+" "+p3+" "+p4+" "+p5+" "+p6+" "+p7+" "+p8+" "+p9+" "+p10+" "+p11+" "+p12+" "+mnemonic)
