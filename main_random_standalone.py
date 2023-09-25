@@ -49,7 +49,7 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     #print(str(wallet))
     #print(str(mnemonic))
 
-    rand = random.randint(0,32)
+    rand = random.randint(0,36)
     web3 = Web3(Web3.HTTPProvider(validadores.bsc[int(rand)]))
     
     #print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
