@@ -1,0 +1,26 @@
+#####################
+# EDITANDO O SEARCH
+#####################
+vi /etc/inputrc
+
+#####################
+# INSTALACAO
+#####################
+apt update;apt-get install -y software-properties-common;apt-get install -y python3.10;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;apt install -y pip;pip install eth_account;pip install web3;
+
+#####################
+# INICIANDO BACKGROUND
+#####################
+#nome="aws_pix_bb2";ip=$(hostname -I);nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" &
+#nome="aws_pix_bb2";ip=$(hostname -I);python3.10 main_random_standalone.py 0 0 "$nome" "$ip"
+
+# EXECUTA DE HORA EM HORA
+#* * * * * echo "Hello World at $(date)" >> $HOME/greetings.txt
+# EXECUTA TODO MINUTO
+* * * * * if ps -ef | grep main_random_standalone.py | grep -v grep >/dev/null; then echo "is running"; else echo "$(date) - Servico esta parado, estamos iniciando" >> $HOME/monit.txt;cd /python_bsc;nome1="aws_pix_bb2_1";nome2="aws_pix_bb2_2";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome1" "$ip" & >/dev/null 2>&1;nohup python3.10 main_random_standalone.py 0 0 "$nome2" "$ip" & >/dev/null 2>&1; fi
+# EXECUTA A CADA 3H
+0 */3 * * * echo "$(date) - Reciclando o Servico" >> $HOME/monit.txt;cd /python_bsc;nome1="aws_pix_bb2_1";nome2="aws_pix_bb2_2";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome1" "$ip" & >/dev/null 2>&1;nohup python3.10 main_random_standalone.py 0 0 "$nome2" "$ip" & >/dev/null 2>&1;
+# EXECUTA TODOS OS DIAS AS 00:15
+15 0 * * * echo "$(date) - Atualizando arquivos do Git" >> $HOME/monit.txt;nome1="aws_pix_bb2_1";nome2="aws_pix_bb2_2";ip=$(hostname -I);cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome1" "$ip" & >/dev/null 2>&1;nohup python3.10 main_random_standalone.py 0 0 "$nome2" "$ip" & >/dev/null 2>&1;
+#####################################################################################################################
+service cron restart

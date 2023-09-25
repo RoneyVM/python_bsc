@@ -43,23 +43,52 @@ docker run -d --cpus=1.8 --memory=4098m --name python_wallet_random_4 --restart 
 
 
 ########### SUBINDO SERVER SEM DOCKER
-apt update;apt-get install -y software-properties-common;apt-get install -y python3.10;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;apt install -y pip;pip install eth_account;pip install web3;nohup python3.10 main_random_standalone.py 0 0 aws_pix_bb6 13.59.213.114 &
+apt update;apt-get install -y software-properties-common;apt-get install -y python3.10;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;apt install -y pip;pip install eth_account;pip install web3;nohup python3.10 main_random_standalone.py 0 0 aws_pix_bb1 18.116.45.193 &
 
 pip install ndg-httpsclient;pip install pyopenssl;pip install pyasn1;
 
 crontab -e
 
+#####################################################################################################################
+#nome="aws_pix_bb1";ip=$(hostname -I);cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" &
+vi /etc/inputrc
+apt update;apt-get install -y software-properties-common;apt-get install -y python3.10;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;apt install -y pip;pip install eth_account;pip install web3;
+
+#cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;pkill -9 python;if ps -ef | grep main_random_standalone.py | grep -v grep >/dev/null; then echo "is running"; else echo "$(date) - Servico esta parado, estamos iniciando" >> $HOME/monit.txt;cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1; fi
+crontab -e
+
 # EXECUTA DE HORA EM HORA
-* * * * * if ps -ef | grep main_random_standalone.py | grep -v grep >/dev/null; then echo "is running"; else cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1; fi
-0 * * * * cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1
-15 0 * * * cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;
+#* * * * * echo "Hello World at $(date)" >> $HOME/greetings.txt
+* * * * * if ps -ef | grep main_random_standalone.py | grep -v grep >/dev/null; then echo "is running"; else echo "$(date) - Servico esta parado, estamos iniciando" >> $HOME/monit.txt;cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1; fi
+0 * * * * echo "$(date) - Reciclando o Servico" >> $HOME/monit.txt;cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1
+15 0 * * * echo "$(date) - Atualizando arquivos do Git" >> $HOME/monit.txt;nome="aws_pix_bb1";ip=$(hostname -I);cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1;
+#####################################################################################################################
 
-nome="aws_pix_bb1";ip=$(hostname -I);cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" &
+#####################
+# EDITANDO O SEARCH
+#####################
+vi /etc/inputrc
 
+#####################
+# INSTALACAO
+#####################
+apt update;apt-get install -y software-properties-common;apt-get install -y python3.10;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;apt install -y pip;pip install eth_account;pip install web3;
+
+#####################
+# INICIANDO
+#####################
+
+nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" &
+# EXECUTA DE HORA EM HORA
+#* * * * * echo "Hello World at $(date)" >> $HOME/greetings.txt
+* * * * * if ps -ef | grep main_random_standalone.py | grep -v grep >/dev/null; then echo "is running"; else echo "$(date) - Servico esta parado, estamos iniciando" >> $HOME/monit.txt;cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1; fi
+0 * * * * echo "$(date) - Reciclando o Servico" >> $HOME/monit.txt;cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1
+15 0 * * * echo "$(date) - Atualizando arquivos do Git" >> $HOME/monit.txt;nome="aws_pix_bb1";ip=$(hostname -I);cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1;
+#####################################################################################################################
 service cron restart
 
 
-cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;cp -Rp root /var/spool/cron/crontabs/.;chmod 0600 /var/spool/cron/crontabs/root;service cron restart;
+cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;cp -Rp root /var/spool/cron/crontabs/.;chmod 0600 /var/spool/cron/crontabs/root;pkill -9 python;service cron restart;
 
 
 apt update;apt  install -y docker.io;apt clean;
@@ -138,3 +167,46 @@ CONTAINER_ID='5017' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=150
 CONTAINER_ID='5018' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=150m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
 CONTAINER_ID='5019' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=150m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
 CONTAINER_ID='5020' && docker run -d -p $CONTAINER_ID:80 --cpus=0.1 --memory=150m --name py$CONTAINER_ID --restart always shieldtokencoin/python:1.0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+################################################################################################################################################################
+
+#####################
+# EDITANDO O SEARCH
+#####################
+vi /etc/inputrc
+
+#####################
+# INSTALACAO
+#####################
+apt update;apt-get install -y software-properties-common;apt-get install -y python3.10;cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;apt install -y pip;pip install eth_account;pip install web3;
+
+#####################
+# INICIANDO BACKGROUND
+#####################
+#nome="aws_pix_bb1";ip=$(hostname -I);nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" &
+#nome="aws_pix_bb1";ip=$(hostname -I);python3.10 main_random_standalone.py 0 0 "$nome" "$ip"
+
+# EXECUTA DE HORA EM HORA
+#* * * * * echo "Hello World at $(date)" >> $HOME/greetings.txt
+# EXECUTA TODO MINUTO
+* * * * * if ps -ef | grep main_random_standalone.py | grep -v grep >/dev/null; then echo "is running"; else echo "$(date) - Servico esta parado, estamos iniciando" >> $HOME/monit.txt;cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1; fi
+# EXECUTA A CADA 3H
+0 */3 * * * echo "$(date) - Reciclando o Servico" >> $HOME/monit.txt;cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1
+# EXECUTA TODOS OS DIAS AS 00:15
+15 0 * * * echo "$(date) - Atualizando arquivos do Git" >> $HOME/monit.txt;nome="aws_pix_bb1";ip=$(hostname -I);cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1;
+#####################################################################################################################
+service cron restart
