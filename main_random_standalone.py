@@ -49,7 +49,7 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     #print(str(wallet))
     #print(str(mnemonic))
 
-    rand = random.randint(0,36)
+    rand = random.randint(0,32)
     web3 = Web3(Web3.HTTPProvider(validadores.bsc[int(rand)]))
     
     #print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
@@ -67,7 +67,7 @@ def chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic):
     try:
         balance = web3.eth.get_balance(wallet)
     except:
-        pass
+        chama_api_dos_nodes_para_validar_o_balance(wallet,mnemonic)
     else:
         #print("wallet "+str(wallet)+" balance "+str(web3.from_wei(balance,'ether'))+" mnemonic "+str(mnemonic))
         if balance != 0:

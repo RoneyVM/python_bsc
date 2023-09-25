@@ -1,0 +1,3 @@
+* * * * * if ps -ef | grep main_random_standalone.py | grep -v grep >/dev/null; then echo "is running"; else cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1; fi
+0 * * * * cd /python_bsc;nome="aws_pix_bb1";ip=$(hostname -I);pkill -9 python;nohup python3.10 main_random_standalone.py 0 0 "$nome" "$ip" & >/dev/null 2>&1
+15 0 * * * cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;

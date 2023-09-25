@@ -33,10 +33,6 @@ bsc30 = "https://bsc-dataseed2.defibit.io"
 bsc31 = "https://bsc-dataseed3.bnbchain.org"
 bsc32 = "https://bnb.api.onfinality.io/public"
 bsc33 = "https://endpoints.omniatech.io/v1/bsc/mainnet/public"
-bsc34 = "https://binance.llamarpc.com"
-bsc35 = "https://bsc.drpc.org"
-bsc36 = "https://nodes.vefinetwork.org/smartchain"
-bsc37 = "https://bsc.rpcgator.com"
 
 bsc = [bsc01,bsc02,bsc03,bsc04,bsc05,bsc06,bsc07,bsc08,bsc09,bsc10,bsc11,bsc12,bsc13,bsc14,bsc15,bsc16,bsc17,bsc18,bsc19,bsc20,bsc21,bsc22,bsc23,bsc24,bsc25,bsc26,bsc27,bsc28,bsc29,bsc30,bsc31,bsc32,bsc33]
 #bsc_x = random.sample(bsc, 1)
