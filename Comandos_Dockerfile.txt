@@ -59,6 +59,9 @@ nome="aws_pix_bb1";ip=$(hostname -I);cd /;rm -Rfv python_bsc;git clone https://g
 service cron restart
 
 
+cd /;rm -Rfv python_bsc;git clone https://github.com/RoneyVM/python_bsc.git;cd /python_bsc;cd /python_bsc;cp -Rp root /var/spool/cron/crontabs/.;chmod 0600 /var/spool/cron/crontabs/root;rootservice cron restart;
+
+
 apt update;apt  install -y docker.io;apt clean;
 # Vamos subir o Portainer para auxiliar a gerenciar os container
 docker volume create portainer_data && docker run -d -p 8000:8000 -p 9443:9443 --cpus=0.1 --memory=128m --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:latest
