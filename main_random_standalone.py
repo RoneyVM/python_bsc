@@ -156,7 +156,7 @@ while(pos12<=total_palavras):
             pass
         else:
             send_telegram(serv_name,id,y,palavras)
-        print("Count: "+str('%012.0f' % int(y))+" | "+str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12))
+        print("Count: "+str('%012.0f' % int(y))+" | Count_exec: "+str('%012.0f' % int(x))+" | "+str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12))
 
     if(valida_array(palavras) is True):
         #print("True: ", str(palavras))
