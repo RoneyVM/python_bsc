@@ -143,13 +143,14 @@ def validada_limite_dos_valores(var1,pos01,pos02,pos03,pos04,pos05,pos06,pos07,p
 
 while(pos12<=total_palavras):
     pos01=pos01+1
+    x=x+1
     pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12 = validada_limite_dos_valores(var1,pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12)       
     #time.sleep(0.01)
     #print(y)
     palavras = [pos01,pos02,pos03,pos04,pos05,pos06,pos07,pos08,pos09,pos10,pos11,pos12]
-    if (y % 10000) == 0:
+    if (x % 10000) == 0:
         time.sleep(1)
-        payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\nPhrase:'+str(palavras)+'\nExecutado: '+str(y)+''}
+        payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\nPhrase:'+str(palavras)+'\nExecutado: '+str(y)+'\nTotal_Checagem: '+str(x)+''}
         r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
         if r.ok:
             pass
@@ -187,15 +188,6 @@ while(pos12<=total_palavras):
                 if(pos01 < total_palavras and (pos01 == pos02 or pos01 == pos03 or pos01 == pos04 or pos01 == pos05 or pos01 == pos06 or pos01 == pos07 or pos01 == pos08 or pos01 == pos09 or pos01 == pos10 or pos01 == pos11 or pos01 == pos12)):
                     pos01=pos01+1;y=y+1
                     #print(pos01,valida_array(palavras))
-                    if (y % 10000) == 0:
-                        time.sleep(1)
-                        payload = {'chat_id': '139945866', 'text': '🟢 LOOP ROBO:\n'+str(serv_name)+': '+str(id)+'\nSERVER: '+str(server)+'\nSERVER IP: '+str(server_ip)+'\nPhrase:'+str(palavras)+'\nExecutado: '+str(y)+''}
-                        r = requests.post("https://api.telegram.org/bot6534285154:AAEzeSG2Nvyn46uGD88VeC2eREAiW80SntA/sendMessage", data=payload)  
-                        if r.ok:
-                            pass
-                        else:
-                            send_telegram(serv_name,id,y,palavras)
-                        print("Count: "+str('%012.0f' % int(y))+" | "+str(pos01),str(pos02),str(pos03),str(pos04),str(pos05),str(pos06),str(pos07),str(pos08),str(pos09),str(pos10),str(pos11),str(pos12))                    
                 else:
                     break
 
