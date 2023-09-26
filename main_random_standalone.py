@@ -170,7 +170,7 @@ while(pos12<=total_palavras):
         else:      
             #print("True: ", str(palavras))
             r = json.loads(retorno)      
-            print("Count: "+str('%012.0f' % int(y))+" | "+str(r['wallet'])+" | "+str(r['seq'])+" | "+str(r['mnemonic']))                                    
+            print("Count: "+str('%012.0f' % int(y))+" | Count_exec: "+str('%012.0f' % int(x))+" | "+str(r['wallet'])+" | "+str(r['seq'])+" | "+str(r['mnemonic']))                                    
             #print(r)
             #print(str(r['wallet']))
             #print(str(r['seq']))
