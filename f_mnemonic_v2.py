@@ -29,7 +29,7 @@ def inicio(cont_seq,cont_ord,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,var1):
     #print(str(array_palavras.palavra_random[int(p12)]))
     mnemonic = str(array_palavras.palavra_random[int(p1)])+" "+str(array_palavras.palavra_random[int(p2)])+" "+str(array_palavras.palavra_random[int(p3)])+" "+str(array_palavras.palavra_random[int(p4)])+" "+str(array_palavras.palavra_random[int(p5)])+" "+str(array_palavras.palavra_random[int(p6)])+" "+str(array_palavras.palavra_random[int(p7)])+" "+str(array_palavras.palavra_random[int(p8)])+" "+str(array_palavras.palavra_random[int(p9)])+" "+str(array_palavras.palavra_random[int(p10)])+" "+str(array_palavras.palavra_random[int(p11)])+" "+str(array_palavras.palavra_random[int(p12)])
     #print(mnemonic)
-    mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
+    #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
     try:
         acc = w3.eth.account.from_mnemonic(mnemonic, account_path=f"m/44'/60'/0'/0/0")
     except:
