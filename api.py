@@ -1,11 +1,11 @@
 from flask import Flask, jsonify, request
 from web3 import Web3
 #import config
-#import mysql.connector
+import mysql.connector
 import random, sys
 #import os, json
 import validadores
-#import array_palavras
+import array_palavras
 import requests
 from decimal import *
 #import resource
@@ -18,10 +18,72 @@ from decimal import *
 app = Flask(__name__)
 
 
+
 w3 = Web3()
 rand = random.randint(0,32)
 web3 = Web3(Web3.HTTPProvider(validadores.bsc[int(rand)]))
 w3.eth.account.enable_unaudited_hdwallet_features()
+
+
+
+def funcao_mnemonic():
+    mnemonic = random.sample(array_palavras.p, 12)
+    #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
+    return mnemonic
+
+def funcao_valida_mnemonic(mnemonic):
+    #mnemonic = "luxury rebel tenant boat match antique drop album dress scissors pizza crop"
+    wallet = "none"
+    try:
+        acc = w3.eth.account.from_mnemonic(mnemonic, account_path=f"m/44'/60'/0'/0/0")
+    except:
+        pass
+    else:
+        #total_wallet=int(total_wallet+1)
+        #inicio = time.perf_counter()
+        wallet = str(acc.address)
+        #balance = web3.eth.get_balance(wallet)
+        #print("wallet "+str(wallet)+" balance "+str(balance)+" mnemonic "+str(mnemonic))
+        print("wallet "+str(wallet)+" mnemonic "+str(mnemonic))
+    return wallet
+#####################################################################################################################
+@app.route('/wallet_create',methods=['GET'])
+def obter_wallet():
+
+    #mydb = mysql.connector.connect(host="191.252.60.124",user="root",password="R0n3y@c3rt3@$3nh@",database="shieldtokencoin")
+    #mycursor = mydb.cursor()
+    #sql = "select now()"
+    #sql = "SELECT frase FROM frase AS t1 JOIN (SELECT id FROM frase ORDER BY RAND() LIMIT "+str(select_em)+") as t2 ON t1.id=t2.id"
+    #sql = "SELECT frase FROM (SELECT ROUND(RAND() * (SELECT MAX(id) FROM frase)) random_num, @num:=@num + 1 FROM (SELECT @num:=0) AS a, frase LIMIT "+str(select_em)+") AS b, frase AS t WHERE b.random_num = t.id"
+    #sql = "SELECT frase FROM frase LIMIT "+str(select_em)+""
+    #sql = "SELECT frase FROM frase ORDER BY id DESC LIMIT "+str(select_em)+""
+    #mycursor.execute(sql)
+    #myresult = mycursor.fetchall()
+    #mycursor.close()
+    #mydb.close()    
+    #array_palavras.palavra_random = random.sample(p, 12)
+    global wallet
+    global balance
+    wallet = "none"
+    balance = "none"
+    
+    while True:
+        mnemonic = funcao_mnemonic()
+        wallet = funcao_valida_mnemonic(mnemonic)
+        print("wallet "+str(wallet)+" mnemonic "+str(mnemonic))
+        if wallet != "none":
+            break
+
+
+    
+
+    return jsonify({"mnemonic":""+str(mnemonic)+"","wallet":""+str(wallet)+""})
+    
+
+#####################################################################################################################
+
+
+
 
 @app.route('/balance',methods=['POST'])
 def balance2():
@@ -67,3 +129,7 @@ PORTA=int(sys.argv[1])
 app.run(host='0.0.0.0',port=PORTA,debug=True)
 #os.system('sync; echo 3 > /proc/sys/vm/drop_caches')
 #C:/Users/roney/AppData/Local/Programs/Python/Python311/python.exe c:/Users/roney/Documents/GitHub/python_bsc/api.py 80
+
+
+
+

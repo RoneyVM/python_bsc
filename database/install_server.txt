@@ -1,0 +1,82 @@
+
+# Ubuntu 20.04
+# DataBase
+# vps38166.publiccloud.com.br 
+# 191.252.60.124
+
+# Apache2, phpmyadmin, mysql
+
+# Ajus@tes padrão de cada VPS
+# Editar o arquivo /etc/inputrc retirando "#" das linhas abaixo
+vi /etc/inputrc
+# "\e[5~": history-search-backward
+# "\e[6~": history-search-forward
+
+# Reinicie a VPS
+shutdown -r now
+
+ufw enable
+ufw allow 80
+ufw allow 3306
+ufw allow 22
+ufw app list
+
+#==================================================================================================
+# Processo de configuração do Mysql / DataBase                                                    #
+#==================================================================================================
+apt update && apt list --upgradable && apt install -y mysql-server && apt clean
+
+# Vamos editar o arquivo mysqld.cnf alterando o campo do bind-address como abaixo
+vi /etc/mysql/mysql.conf.d/mysqld.cnf
+bind-address            = 0.0.0.0
+
+# Precisamos restartar o Mysql
+systemctl restart mysql.service
+
+# Vamos configurar o usuário / senha de acesso ao MySql, execute um comando por vez
+mysql;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'R0n3y@c3rt3@$3nh@';
+CREATE USER 'root'@'%'        IDENTIFIED WITH mysql_native_password BY 'R0n3y@c3rt3@$3nh@';
+CREATE USER 'phpmyadmin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'R0n3y@c3rt3@$3nh@';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost';
+FLUSH PRIVILEGES;
+exit;
+#==================================================================================================
+
+#==================================================================================================
+# Fazendo a liberação do Firewall para comunicação entre os Hosts do Database / WebServer         #
+#==================================================================================================
+# Vamos liberar a entrada e saída entre os servidores
+iptables -A INPUT -p tcp -s 191.252.60.124 -j ACCEPT;iptables -A OUTPUT -p tcp -d 191.252.60.124 -j ACCEPT;
+iptables -A INPUT -p tcp -s 191.252.102.54 -j ACCEPT;iptables -A OUTPUT -p tcp -d 191.252.102.54 -j ACCEPT;
+#==================================================================================================
+
+#==================================================================================================
+# Instalação do PhpMyAdmin para auxiliar no gerenciamento do DataBase                             #
+#==================================================================================================
+# Vamos fazer a instalação dos softwares phpmyadmin, php e modulos do php
+apt-get install -y phpmyadmin php-mbstring php libapache2-mod-php php-mysql
+
+# Vamos incluir o .php para leitura como principal do servidor, edite como abaixo
+vi /etc/apache2/mods-enabled/dir.conf
+
+<IfModule mod_dir.c>
+        DirectoryIndex index.php index.html index.cgi index.pl index.php index.xhtml index.htm
+</IfModule>
+
+# Vamos reiniciar o processo do apache2
+systemctl reload apache2
+
+# Vamos preparar o servidor para que possamos acessar o PhpMyAdmin
+cp -Rp /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+ls -la /etc/apache2/conf-available/phpmyadmin.conf
+a2enconf phpmyadmin.conf
+systemctl reload apache2
+
+vi /etc/php/7.4/apache2/php.ini
+upload_max_filesize = 1024M
+
+http://191.252.60.124/phpmyadmin/
+#==================================================================================================

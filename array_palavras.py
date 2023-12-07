@@ -7,6 +7,6 @@ p = ["abandon","ability","able","about","above","absent","absorb","abstract","ab
 #p2 = ['file', 'letter', 'time', 'youth', 'observe', 'such', 'alien', 'enemy', 'harsh', 'half', 'catch', 'wear', 'ski', 'board', 'utility']
 #p2 = ['luxury', 'rebel', 'tenant', 'boat', 'match', 'antique', 'drop', 'album', 'dress', 'scissors', 'pizza', 'crop', 'wage']
 
-palavra_random = random.sample(p, 200)
+palavra_random = random.sample(p, 12)
 #palavra_random = p2
 #print(palavra_random)
